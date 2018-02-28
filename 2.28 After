@@ -1,0 +1,45 @@
+from __future__ import print_function
+import random
+
+def hanagman(secret):
+    output = ""
+    attempts = 6
+    guessed = ""
+    while output != secret and attempts <= 6:
+        guessed += raw_input('Guess a letter:')
+        for i in secret:
+            if i in guessed or i == ' ':
+                output += i
+            else:
+                output += '-'
+                print(output)
+        output = ""
+
+def hangman():
+    print('I have chosen a random word. You have 6 guesses. At any time may type "answer" to attempt to answer. If you are wrong, its game over.')
+    secret = random.choice(['explain','structure','continue'])
+    comforting_word = random.choice(['Ouch','No worries','Next time'])
+    output = ""
+    attempts = 6
+    #i = raw_input('Guess a letter:')
+    while output != secret and attempts >= 0:
+        i = raw_input('Guess a letter:')   
+        #for i in secret:
+        if i in secret or i == ' ':
+            output += i
+            print('Great job! You still have', attempts,'lives left.')
+            print('Your current state is shown below!')
+            print(" __________ ")
+            print("|   | ")
+            print("|   0 ")
+            print("|  /|\ ")
+            print("|  / \ ")
+            print("| ")
+            print("| ")
+            #i = raw_input('Guess a letter:')
+        
+        if i not in secret: 
+            attempts = attempts-1
+            print(comforting_word,'! You still have', attempts,'left.')
+        
+
