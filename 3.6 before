@@ -1,0 +1,75 @@
+from __future__ import print_function
+import random
+import time
+
+def secret_w():
+    s = random.choice(['explain','structure','continue'])
+    return s
+def comforting_w():
+    c = random.choice(['Ouch','No worries','Next time'])
+    return c
+
+def hangman_display():
+    print('I have chosen a random word. You have 6 guesses. At any time may type "answer" to attempt to answer. If you are wrong, its game over.') 
+    answ = raw_input('Type "ok" to play:')
+    secret_w()
+    comforting_w()
+    attempts = 6    
+    output = ""  
+    if answ == 'ok' or answ == 'Ok' or answ == 'k' or answ == 'OK':
+        while output != secret_w() and attempts >= 0:
+            guessed = raw_input('Guess a letter or try to guess the full word by typing "answer":')
+            if guessed == 'answ' or guessed == 'answer':
+                done = raw_input('Wow! You already know? Whats the word:')
+                if done == secret_w():
+                    return "Nice! You won mate!"
+                else:
+                    return "You have lost, sorry mate."  
+            else:          
+                if guessed in secret_w():         #disregard if not       
+                    for i in secret_w():
+                        if i in guessed or i == ' ':
+                            output += i
+                            print('Great job! You still have', attempts,'lives left.')
+                            guessed = ""
+            
+                else:
+                            attempts = attempts-1
+                            print(comforting_w(),'! You still have', attempts,'lives left.')    
+                            guessed = ""
+                            print(output) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def hangman():
+    print('I have chosen a random word. You have 6 guesses. At any time may type "answer" to attempt to answer. If you are wrong, its game over.')
+    secret_w()
+    comforting_w()
+    output = ""
+    attempts = 6
+    #i = raw_input('Guess a letter:')
+    while output != secret_w() and attempts >= 0:
+        i = raw_input('Guess a letter:')   
+        #for i in secret:
+        if i in secret_w() or i == ' ':
+            output += i
+            print('Great job! You still have', attempts,'lives left.')
+            #i = raw_input('Guess a letter:')
+        
+        if i not in secret_w(): 
+            attempts = attempts-1
+            print(comforting_w(),'! You still have', attempts,'lives left.')
