@@ -1,0 +1,41 @@
+import random
+
+Animals=('ant','bee','cat','dog','elephant','fish','giraffe','hedgehog','iguana','jaguar','kangaroo','llama','macaw','numbat','ocelot','polar bear','quail','rabbit','salamander','termite','uakari','vervet monkey','walrus','xenon','yak','zebra')
+winner = random.choice(Animals)
+guessed = " -"
+length = len(winner)
+correct=0
+attempt=0
+
+
+
+def hangman():
+    global correct, attempt
+    print('HINT:animal')
+    while attempt!=6 and correct!=length:
+        correct=0
+        for guess in winner:
+            if guess in guessed :
+                print guess,
+                correct+=1
+            else:
+                print "_",
+        userguess()
+        print(attempt)
+    if correct == length:
+        print("You WIN!")
+    else:
+        print("You Lost. Word was",winner)
+    correct=0
+    attempt=0
+
+def userguess():
+    global attempt, guessed
+    letterguessed= raw_input('guess:')
+    while len(letterguessed)>1:
+        print("you can only guess one letter at a time")
+        letterguessed= raw_input('guess:')
+    if letterguessed not in winner:
+        attempt+=1
+    guessed+=letterguessed
+
