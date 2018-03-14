@@ -1,0 +1,46 @@
+import random
+
+def secret_w_choices():
+  s = random.choice(['explain','structure','continue'])
+  return s
+
+
+def comforting_w():
+    c = random.choice(['Ouch','No worries','Next time'])
+    return c
+    
+attempts = 6
+def Hangman():
+  #intro
+    global attempts
+    print('I have chosen a random word.')
+    print (''' 
+    
+    
+    
+    ''')
+    print ("You may begin, please choose wisely as you only have 6 lives!...")
+    sec_word = secret_w_choices()
+    letters_g = ''
+    #########hangman code
+    while attempts > 0:         
+        words_wrong = 0            
+        for i in sec_word:      
+            if i in letters_g:    
+                print(i)    
+            else:
+                print("__")     
+                words_wrong += 1    
+        if words_wrong == 0:        
+            return "No way! You have guessed my word. Congrats!"  
+             
+        print
+        print(letters_g)
+        user_guess = raw_input('guess a character:') 
+        letters_g += user_guess                     
+        if user_guess not in sec_word:  
+            attempts=attempts - 1        
+            print (comforting_w(), "You have", + attempts, 'more guesses')
+            if attempts == 0:           
+                return comforting_w(), "all you had to do was guess", sec_word
+    
